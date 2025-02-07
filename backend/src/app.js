@@ -4,15 +4,21 @@ const app=express();
 
 //request handlers 
 
-app.use("/home",(req,res)=>{
-    res.send("welcome to dashBoard .....!");
+app.get('/user/:userId',(req,res)=>{
+    console.log(req.query)
+    console.log(req.params)
+    res.send({firstName:"chethan",lastName:"gowda"} )
 })
-app.use("/test",(req,res)=>{
-    res.send("This are the test cases");
+
+app.post('/user',(req,res)=>{
+    res.send("data saved succesfullly");
+
 })
-app.use("/",(req,res)=>{
-    res.send("Hi how are you iam chethan");
-})
+
+app.delete('/user',(req,res)=>{
+    res.send("data deleted succesfully")
+}) 
+
 
 app.listen(3000,()=>{
     console.log("server is running in a port 3000");
