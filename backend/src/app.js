@@ -1,25 +1,22 @@
 const express = require('express');
-
+const authMiddleware=require("./middlewares/auth")
 const app=express();
 
-//request handlers 
 
-app.get('/user/:userId',(req,res)=>{
-    console.log(req.query)
-    console.log(req.params)
-    res.send({firstName:"chethan",lastName:"gowda"} )
+app.post('/user/login',(req,res)=>{
+    res.send("user logged in successfully")
 })
 
-app.post('/user',(req,res)=>{
-    res.send("data saved succesfullly");
+app.use('/user',authMiddleware);
 
+app.get('/user/data',(req,res)=>{
+res.send("you can acees the data ")
 })
-
-app.delete('/user',(req,res)=>{
-    res.send("data deleted succesfully")
-}) 
-
+app.get('/user/profile',(req,res)=>{
+res.send("this is user profile ")
+})
 
 app.listen(3000,()=>{
     console.log("server is running in a port 3000");
 })
+

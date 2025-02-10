@@ -18,3 +18,4 @@ install postman and make a api call
 write logic to handle api calls (get ,post,put. delete)
 use of regex in routes
 reading querry params and reading the params
+write a auth middleware for admin and for all the user routes except login
