@@ -1,22 +1,36 @@
-const express = require('express');
-const authMiddleware=require("./middlewares/auth")
+const express =require("express");
+const connectDB = require('./config/database');
+const User = require("./models/user")
 const app=express();
 
-
-app.post('/user/login',(req,res)=>{
-    res.send("user logged in successfully")
+app.post("/signup",async(req,res)=>{
+    const userData={
+        firstName:"manja",
+        lastName:"gowda",
+        age:20,
+        gender:"female",
+        email:"manji@gmail.com",
+        password:"manji@123"
+    }
+    const user=new User(userData);
+    try{
+        await user.save();
+        res.send("data saved successfully")
+    }
+    catch(err){
+        res.status(400).send("failed to save data "+err)
+    }
 })
 
-app.use('/user',authMiddleware);
+connectDB()
+.then(()=>{
+    app.listen(3000,()=>{
+        console.log("server is running in a port 3000");
+    })
+})
+.catch((err)=>{
+    console.log(err);
+})
 
-app.get('/user/data',(req,res)=>{
-res.send("you can acees the data ")
-})
-app.get('/user/profile',(req,res)=>{
-res.send("this is user profile ")
-})
 
-app.listen(3000,()=>{
-    console.log("server is running in a port 3000");
-})
 
