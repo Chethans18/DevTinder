@@ -2,16 +2,11 @@ const express =require("express");
 const connectDB = require('./config/database');
 const User = require("./models/user")
 const app=express();
+// Middleware to parse JSON data
+app.use(express.json());
 
 app.post("/signup",async(req,res)=>{
-    const userData={
-        firstName:"manja",
-        lastName:"gowda",
-        age:20,
-        gender:"female",
-        email:"manji@gmail.com",
-        password:"manji@123"
-    }
+    const userData=req.body;
     const user=new User(userData);
     try{
         await user.save();

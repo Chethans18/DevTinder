@@ -30,3 +30,7 @@ add document to collection
 create a singup api
 push some documents into the database
 handle errors
+
+difference between JSON and JS object
+add json midleware to your app
+make the signup APT dynamic to recive data from the end user
